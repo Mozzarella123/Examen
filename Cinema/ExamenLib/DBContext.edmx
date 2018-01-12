@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DBContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DBContextTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DBContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DBContextContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SeansSet" EntityType="DBContext.Seans" />
+          <EntitySet Name="HallSet" EntityType="DBContext.Hall" />
+          <EntitySet Name="PlaceSet" EntityType="DBContext.Place" />
+          <EntitySet Name="FilmSet" EntityType="DBContext.Film" />
+          <EntitySet Name="TicketSet" EntityType="DBContext.Ticket" />
+          <AssociationSet Name="TicketPlace" Association="DBContext.TicketsPlace">
+            <End Role="Ticket" EntitySet="TicketSet" />
+            <End Role="Place" EntitySet="PlaceSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Seans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowCount" Type="Int16" Nullable="false" />
+          <Property Name="ColumnCount" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Row" Type="Int16" Nullable="false" />
+          <Property Name="Seat" Type="Int16" Nullable="false" />
+          <Property Name="Price" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Tickets" Relationship="DBContext.TicketsPlace" FromRole="Place" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Desctiption" Type="String" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="RealizeTime" Type="DateTime" Nullable="false" />
+          <Property Name="EndsTime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Summ" Type="String" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="DBContext.TicketsPlace" FromRole="Ticket" ToRole="Place" />
+        </EntityType>
+        <Association Name="TicketsPlace">
+          <End Type="DBContext.Ticket" Role="Ticket" Multiplicity="*" />
+          <End Type="DBContext.Place" Role="Place" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DBContext" />
+        <Alias Key="Target" Value="DBContext.Store" />
+        <EntityContainerMapping CdmEntityContainer="DBContextContainer" StorageEntityContainer="DBContextTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
