@@ -11,11 +11,11 @@ namespace ExamenProj
     public class AppDbContext : DbContext
     {
 
-        DbSet<Film> Films { get; set; }
-        DbSet<Hall> Halls { get; set; }
-        DbSet<Place> Places { get; set; }
-        DbSet<Seans> Seanses { get; set; }
-        DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Film> Films { get; set; }
+        public DbSet<Hall> Halls { get; set; }
+        public DbSet<Place> Places { get; set; }
+        public DbSet<Seans> Seanses { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
     }
 }
